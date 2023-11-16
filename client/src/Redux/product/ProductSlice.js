@@ -2,8 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 //setting initail state
 const initialState = {
-    //product: null,
-    products: null,
+    products: [],
     error: null,
     loading: null,
     totalStoreValue: 0,
@@ -54,6 +53,33 @@ const productSlice = createSlice({
               }, 0);
               state.totalStoreValue = totalValue;
             },
+            CALC_OUTOFSTOCK(state, action) {
+                const products = action.payload;
+                const array = [];
+                products.map((item) => {
+                  const { quantity } = item;
+          
+                  return array.push(quantity);
+                });
+                let count = 0;
+                array.forEach((number) => {
+                  if (number === 0 || number === "0") {
+                    count += 1;
+                  }
+                });
+                state.outOfStock = count;
+            },
+            CALC_CATEGORY(state, action) {
+                const products = action.payload;
+                const array = [];
+                products.map((item) => {
+                  const { category } = item;
+          
+                  return array.push(category);
+                });
+                const uniqueCategory = [...new Set(array)];
+                state.category = uniqueCategory;
+              },
     }
 });
 
@@ -64,11 +90,15 @@ export const {
   GetProductFailure,
   GetProductStart,
   GetProductSuccess,
-  CALC_STORE_VALUE   
+  CALC_STORE_VALUE,
+  CALC_OUTOFSTOCK,
+  CALC_CATEGORY
 } = productSlice.actions;
 
 
 export const selectTotalStoreValue = (state) => state.product.totalStoreValue;
+export const selectOutOfStock = (state) => state.product.outOfStock;
+export const selectCategory = (state) => state.product.category;
 
 export default productSlice.reducer;
 

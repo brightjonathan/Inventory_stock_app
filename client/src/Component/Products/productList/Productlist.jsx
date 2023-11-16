@@ -11,8 +11,14 @@ import {
   FILTER_PRODUCTS,
   selectFilteredPoducts,
 } from "../../../Redux/product/FilterSlice";
+import { toast } from 'react-toastify';
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
-const Productlist = ({products, isLoading}) => {
+
+
+
+const Productlist = ({products, isLoading, setLoading, fetchproducts}) => {
 
 
   //the filteredProducts is also "products", I only used it cause of filter func... in the redux
@@ -60,6 +66,53 @@ const Productlist = ({products, isLoading}) => {
     setItemOffset(newOffset);
   };
   //   End Pagination
+
+
+  //delete func...
+  const delProduct = async (_id) => {
+    try {
+          setLoading(true)
+          //dispatch(DeleteProductStart());
+    
+          const res =  await fetch(`/api/product/deleteproduct/${_id}`, {
+            method: 'DELETE',
+          });
+          const data = await res.json();
+          if (data.success === false) {
+            setLoading(false)
+            toast.error(data.message);
+            return;
+          }
+          toast.success('deleted successfully');
+          setLoading(false)
+          
+          //this helps the code to refresh auto for the changes to be made
+          await fetchproducts() 
+    
+        } catch (error) {
+          toast.error(error.message);
+          setLoading(false)
+        }
+
+   
+  };
+
+  const confirmDelete = (_id) => {
+    confirmAlert({
+      title: "Delete Product",
+      message: "Are you sure you want to delete this product.",
+      buttons: [
+        {
+          label: "Delete",
+          onClick: () => delProduct(_id),
+        },
+        {
+          label: "Cancel",
+          // onClick: () => alert('Click No')
+        },
+      ],
+    });
+  };
 
 
   return (
@@ -117,7 +170,9 @@ const Productlist = ({products, isLoading}) => {
                           </Link>
                         </span>
                         <span>
-                          <FaTrashAlt size={20} color={"red"} />
+                          <FaTrashAlt 
+                          onClick={() => confirmDelete(_id)} 
+                          size={20} color={"red"} />
                         </span>
                       </td>
                  </tr>

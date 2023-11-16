@@ -61,7 +61,11 @@ const Dashboard = () => {
   return (
     <div>
       <ProductSummary products={products} />
-      <Productlist products={products} isLoading={loading} />
+      <Productlist 
+      fetchproducts={fetchproducts} 
+      products={products} 
+      setLoading={setLoading} 
+      isLoading={loading} />
     </div>
   )
 }

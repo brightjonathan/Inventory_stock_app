@@ -5,7 +5,14 @@ import { BsCart4, BsCartX } from "react-icons/bs";
 import { BiCategory } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import InforBox, { InforBoxvalue } from "../../InforBox/InforBox";
-import { CALC_STORE_VALUE, selectTotalStoreValue } from "../../../Redux/product/ProductSlice";
+import { 
+  CALC_STORE_VALUE,
+  CALC_CATEGORY,
+  CALC_OUTOFSTOCK,
+  selectTotalStoreValue,
+  selectCategory,
+  selectOutOfStock 
+} from "../../../Redux/product/ProductSlice";
 
 
 // Icons
@@ -24,9 +31,13 @@ const ProductSummary = ({products}) => {
 
   const dispatch = useDispatch();
   const totalStoreValue = useSelector(selectTotalStoreValue);
+  const outOfStock = useSelector(selectOutOfStock);
+  const category = useSelector(selectCategory);
 
   useEffect(() => {
     dispatch(CALC_STORE_VALUE(products));
+    dispatch(CALC_OUTOFSTOCK(products));
+    dispatch(CALC_CATEGORY(products));
   }, [dispatch, products]);
 
   return (
@@ -51,14 +62,14 @@ const ProductSummary = ({products}) => {
         <InforBox
           icon={outOfStockIcon}
           title={"Out of Stock"}
-          count={0}
+          count={outOfStock}
           bgColor="card3"
         />
 
         <InforBox
           icon={categoryIcon}
           title={"All Categories"}
-          count={0}
+          count={category.length}
           bgColor="card4"
         />
         
