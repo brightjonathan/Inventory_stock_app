@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 //setting initail state
 const initialState = {
+    product: null,
     products: [],
     error: null,
     loading: null,
@@ -37,6 +38,18 @@ const productSlice = createSlice({
               state.error = null
           },
           GetProductFailure: (state, action)=>{
+              state.error = action.payload,
+              state.loading = false
+          },
+          GetSingleProductStart: (state)=>{
+            state.loading = true
+          },
+          GetSingleProductSuccess: (state, action)=>{
+              state.product = action.payload,
+              state.loading = true,
+              state.error = null
+          },
+          GetSingleProductFailure: (state, action)=>{
               state.error = action.payload,
               state.loading = false
           },
@@ -90,6 +103,9 @@ export const {
   GetProductFailure,
   GetProductStart,
   GetProductSuccess,
+  GetSingleProductFailure,
+  GetSingleProductStart,
+  GetSingleProductSuccess,
   CALC_STORE_VALUE,
   CALC_OUTOFSTOCK,
   CALC_CATEGORY
@@ -99,7 +115,7 @@ export const {
 export const selectTotalStoreValue = (state) => state.product.totalStoreValue;
 export const selectOutOfStock = (state) => state.product.outOfStock;
 export const selectCategory = (state) => state.product.category;
-
+export const singleProduct = (state)=> state.product.product;
 export default productSlice.reducer;
 
 

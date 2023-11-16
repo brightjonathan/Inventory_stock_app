@@ -157,12 +157,12 @@ const Productlist = ({products, isLoading, setLoading, fetchproducts}) => {
                     <td>&#x20A6;{Number(price * quantity).toLocaleString('en-us')}</td>
                     <td className="icons">
                         <span>
-                          <Link to={`#`}>
+                          <Link to={`/product-detail/${_id}`}>
                             <AiOutlineEye size={25} color={"purple"} />
                           </Link>
                         </span>
                         <span>
-                          <Link to={`#`}>
+                          <Link to={`/edit-product/${_id}`}>
                             <FaEdit size={20} color={"green"} />
                           </Link>
                         </span>
