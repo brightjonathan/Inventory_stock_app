@@ -13,6 +13,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PrivateRoute from './Component/protect/PrivateRoute';
 import Addproduct from './Pages/Addproduct/Addproduct';
+import ProductDetails from './Component/Products/ProductDetails/ProductDetails';
 
 
 
@@ -42,6 +43,14 @@ const App = () => {
             <Sidebars>
               <Layout>
                 <Addproduct/>
+              </Layout>
+            </Sidebars>
+          }/>
+
+         <Route path='/product-detail/:id' element={
+            <Sidebars>
+              <Layout>
+                 <ProductDetails/>
               </Layout>
             </Sidebars>
           }/>

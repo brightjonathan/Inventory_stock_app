@@ -30,7 +30,6 @@ const Productlist = ({products, isLoading, setLoading, fetchproducts}) => {
   //search state
   const [search, setSearch] = useState("");
 
-
   //shorten any text to a particular length number
   const shortenText = (text, n) => {
     if (text.length > n) {
@@ -39,7 +38,6 @@ const Productlist = ({products, isLoading, setLoading, fetchproducts}) => {
     }
     return text;
   };
-
 
 
   //handles the filter func...
@@ -72,8 +70,6 @@ const Productlist = ({products, isLoading, setLoading, fetchproducts}) => {
   const delProduct = async (_id) => {
     try {
           setLoading(true)
-          //dispatch(DeleteProductStart());
-    
           const res =  await fetch(`/api/product/deleteproduct/${_id}`, {
             method: 'DELETE',
           });
@@ -83,10 +79,11 @@ const Productlist = ({products, isLoading, setLoading, fetchproducts}) => {
             toast.error(data.message);
             return;
           }
-          toast.success('deleted successfully');
+          toast.success('Deleted successfully');
           setLoading(false)
           
-          //this helps the code to refresh auto for the changes to be made
+          //this helps the code to refresh auto...
+          //for the changes to be made
           await fetchproducts() 
     
         } catch (error) {
