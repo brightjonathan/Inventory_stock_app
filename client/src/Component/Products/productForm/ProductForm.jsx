@@ -26,7 +26,6 @@ const ProductForm = ({
               Supported Formats: jpg, jpeg, png
             </code>
             <input
-              required
               type="file"
               name="image"
               onChange={(e) => handleImageChange(e)}
@@ -52,7 +51,7 @@ const ProductForm = ({
 
           <label>Product Category:</label>
           <input
-          required
+           required
             type="text"
             placeholder="Product Category"
             name="category"

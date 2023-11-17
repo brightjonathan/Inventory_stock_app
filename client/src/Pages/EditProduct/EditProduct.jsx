@@ -6,7 +6,10 @@ import {
     singleProduct,
     GetSingleProductStart,
     GetSingleProductSuccess,
-    GetSingleProductFailure
+    GetSingleProductFailure,
+    UpdateFailure,
+    UpdateStart,
+    UpdateSuccess
   } from '../../Redux/product/ProductSlice';
   import Loader from '../../Component/loading/Loader';
   import { toast } from "react-toastify";
@@ -45,6 +48,7 @@ const EditProduct = () => {
             toast.error(data.message);
             return; 
         }
+
         //console.log(data);
         dispatch(GetSingleProductSuccess(data));
         setLoading(false);
@@ -84,6 +88,12 @@ const EditProduct = () => {
 
   const saveProduct = async (e) => {
     e.preventDefault();
+
+
+    // if (!product.name || !product.category || !product.quantity || !product.price || !product.description || !product.productImage) {
+    //   toast.error('Pls all input fields are required!')
+    // }
+
     const formData = new FormData();
     formData.append("name", product?.name);
 
@@ -95,11 +105,39 @@ const EditProduct = () => {
       formData.append("image", productImage);
     }
 
-    console.log(...formData);
+    //console.log(...formData);
+    try {
+      setLoading(true);
+      dispatch(UpdateStart());
+      const res = await fetch(`/api/product/updatepproduct/${id}`, {
+        method: 'PATCH',
+        body: formData
+      });
 
-    // await dispatch(updateProduct({ id, formData }));
-    // await dispatch(getProducts());
-    navigate("/dashboard");
+      if (!res.ok) {
+        setLoading(false);
+        dispatch(UpdateFailure(`Error: ${res.statusText}`));
+        //toast.error(`Error: ${res.statusText}`);
+        return;
+      }
+
+      const data = await res.json();
+      if (data.success === false) {
+        setLoading(false);
+        dispatch(UpdateFailure(data.message));
+        toast.error(data.message);
+        return;
+      }
+      dispatch(UpdateSuccess(data))
+      setLoading(false);
+      navigate('/dashboard');
+      toast.success("Updated successfully");
+    } catch (error) {
+      setLoading(false);
+      dispatch(CreateFailure(error.message));
+      toast.error(data.message);
+    }
+
   };
 
 

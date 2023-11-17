@@ -56,6 +56,12 @@ const Addproduct = () => {
   //handlesChanges the onSubmit passing it as a props
   const saveProduct = async (e) => {
     e.preventDefault();
+
+
+    // if (!name || !category || !quantity || !price || !description || !productImage) {
+    //   toast.error('Pls all input fields are required!')
+    // }
+
     const formData = new FormData();
     formData.append("name", name);
     formData.append("sku", generateKSKU(category));
@@ -78,7 +84,7 @@ const Addproduct = () => {
       if (!res.ok) {
         setLoading(false);
         dispatch(CreateFailure(`Error: ${res.statusText}`));
-        toast.error(`Error: ${res.statusText}`);
+        //toast.error(`Error: ${res.statusText}`);
         return;
       }
 

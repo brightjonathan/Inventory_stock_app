@@ -34,7 +34,7 @@ const Dashboard = () => {
 
         if (data.success === false ) {
             setLoading(false)
-            dispatch(GetProductFailure(data.message))
+            dispatch(GetProductFailure(data.message));
             toast.error(data.message);
             return; 
         }

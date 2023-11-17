@@ -29,6 +29,18 @@ const productSlice = createSlice({
               state.error = action.payload,
               state.loading = false
           },
+          UpdateStart: (state)=>{
+            state.loading = true
+          },
+          UpdateSuccess: (state, action)=>{
+              state.products = action.payload,
+              state.loading = true,
+              state.error = null
+          },
+          UpdateFailure: (state, action)=>{
+              state.error = action.payload,
+              state.loading = false
+          },
           GetProductStart: (state)=>{
             state.loading = true
           },
@@ -124,6 +136,9 @@ export const {
   GetSingleProductFailure,
   GetSingleProductStart,
   GetSingleProductSuccess,
+  UpdateFailure,
+  UpdateStart,
+  UpdateSuccess,
   CALC_STORE_VALUE,
   CALC_OUTOFSTOCK,
   CALC_CATEGORY
