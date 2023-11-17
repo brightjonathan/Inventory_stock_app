@@ -57,11 +57,6 @@ const Addproduct = () => {
   const saveProduct = async (e) => {
     e.preventDefault();
 
-
-    // if (!name || !category || !quantity || !price || !description || !productImage) {
-    //   toast.error('Pls all input fields are required!')
-    // }
-
     const formData = new FormData();
     formData.append("name", name);
     formData.append("sku", generateKSKU(category));

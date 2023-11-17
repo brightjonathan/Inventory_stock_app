@@ -90,10 +90,6 @@ const EditProduct = () => {
     e.preventDefault();
 
 
-    // if (!product.name || !product.category || !product.quantity || !product.price || !product.description || !product.productImage) {
-    //   toast.error('Pls all input fields are required!')
-    // }
-
     const formData = new FormData();
     formData.append("name", product?.name);
 
