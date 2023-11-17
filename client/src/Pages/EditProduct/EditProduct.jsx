@@ -56,7 +56,7 @@ const EditProduct = () => {
    };
 
   useEffect(()=>{
-      fetchSingleproduct()
+      fetchSingleproduct();
   },[dispatch, id]);
 
   useEffect(() => {

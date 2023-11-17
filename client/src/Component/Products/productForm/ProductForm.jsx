@@ -26,6 +26,7 @@ const ProductForm = ({
               Supported Formats: jpg, jpeg, png
             </code>
             <input
+              required
               type="file"
               name="image"
               onChange={(e) => handleImageChange(e)}
@@ -41,6 +42,7 @@ const ProductForm = ({
           </Card>
           <label>Product Name:</label>
           <input
+            required
             type="text"
             placeholder="Product name"
             name="name"
@@ -50,6 +52,7 @@ const ProductForm = ({
 
           <label>Product Category:</label>
           <input
+          required
             type="text"
             placeholder="Product Category"
             name="category"
@@ -59,6 +62,7 @@ const ProductForm = ({
 
           <label>Product Price:</label>
           <input
+            required
             type="text"
             placeholder="Product Price"
             name="price"
@@ -68,6 +72,7 @@ const ProductForm = ({
 
           <label>Product Quantity:</label>
           <input
+            required
             type="text"
             placeholder="Product Quantity"
             name="quantity"

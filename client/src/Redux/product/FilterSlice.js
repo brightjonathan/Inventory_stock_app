@@ -10,6 +10,12 @@ const filterSlice = createSlice({
   reducers: {
     FILTER_PRODUCTS(state, action) {
       const { products, search } = action.payload;
+
+      if (!Array.isArray(products)) {
+        // Handle the case where 'products' is not an array
+        return;
+      }
+      
       const tempProducts = products.filter(
         (product) =>
           product.name.toLowerCase().includes(search.toLowerCase()) ||

@@ -29,6 +29,8 @@ export const formatNumbers = (x) => {
 
 const ProductSummary = ({products}) => {
 
+ 
+
   const dispatch = useDispatch();
   const totalStoreValue = useSelector(selectTotalStoreValue);
   const outOfStock = useSelector(selectOutOfStock);

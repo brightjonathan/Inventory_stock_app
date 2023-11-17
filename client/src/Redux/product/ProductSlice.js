@@ -54,45 +54,63 @@ const productSlice = createSlice({
               state.loading = false
           },
           CALC_STORE_VALUE(state, action) {
-              const products = action.payload;
-              const array = [];
-              products.map((item) => {
-                const { price, quantity } = item;
-                const productValue = price * quantity;
-                return array.push(productValue);
-              });
-              const totalValue = array.reduce((a, b) => {
-                return a + b;
-              }, 0);
-              state.totalStoreValue = totalValue;
-            },
-            CALC_OUTOFSTOCK(state, action) {
-                const products = action.payload;
-                const array = [];
-                products.map((item) => {
-                  const { quantity } = item;
-          
-                  return array.push(quantity);
-                });
-                let count = 0;
-                array.forEach((number) => {
-                  if (number === 0 || number === "0") {
-                    count += 1;
-                  }
-                });
-                state.outOfStock = count;
-            },
-            CALC_CATEGORY(state, action) {
-                const products = action.payload;
-                const array = [];
-                products.map((item) => {
-                  const { category } = item;
-          
-                  return array.push(category);
-                });
-                const uniqueCategory = [...new Set(array)];
-                state.category = uniqueCategory;
-              },
+            const products = action.payload;
+      
+            if (!Array.isArray(products)) {
+              // Handle the case where the payload is not an array
+              return;
+            }
+      
+            const array = [];
+            products.map((item) => {
+              const { price, quantity } = item;
+              const productValue = price * quantity;
+              return array.push(productValue);
+            });
+            const totalValue = array.reduce((a, b) => {
+              return a + b;
+            }, 0);
+            state.totalStoreValue = totalValue;
+          },
+      
+          CALC_OUTOFSTOCK(state, action) {
+            const products = action.payload;
+      
+            if (!Array.isArray(products)) {
+              // Handle the case where the payload is not an array
+              return;
+            }
+      
+            const array = [];
+            products.map((item) => {
+              const { quantity } = item;
+              return array.push(quantity);
+            });
+            let count = 0;
+            array.forEach((number) => {
+              if (number === 0 || number === '0') {
+                count += 1;
+              }
+            });
+            state.outOfStock = count;
+          },
+      
+          CALC_CATEGORY(state, action) {
+            const products = action.payload;
+      
+            if (!Array.isArray(products)) {
+              // Handle the case where the payload is not an array
+              return;
+            }
+      
+            const array = [];
+            products.map((item) => {
+              const { category } = item;
+              return array.push(category);
+            });
+            const uniqueCategory = [...new Set(array)];
+            state.category = uniqueCategory;
+          },
     }
 });
 
