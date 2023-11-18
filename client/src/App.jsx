@@ -15,6 +15,8 @@ import PrivateRoute from './Component/protect/PrivateRoute';
 import Addproduct from './Pages/Addproduct/Addproduct';
 import ProductDetails from './Component/Products/ProductDetails/ProductDetails';
 import EditProduct from './Pages/EditProduct/EditProduct';
+import Profile from './Pages/Profile/Profile';
+import EditProfile from './Pages/Profile/EditProfile';
 
 
 
@@ -64,8 +66,23 @@ const App = () => {
             </Sidebars>
           }/>
 
-        </Route>
+         <Route path='/profile' element={
+            <Sidebars>
+              <Layout>
+                 <Profile/>
+              </Layout>
+            </Sidebars>
+          }/>
 
+         <Route path='/edit-profile' element={
+            <Sidebars>
+              <Layout>
+                 <EditProfile />
+              </Layout>
+            </Sidebars>
+          }/>
+
+        </Route>
 
     </Routes>
     </>
