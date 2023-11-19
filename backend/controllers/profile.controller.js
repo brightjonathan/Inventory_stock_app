@@ -58,38 +58,73 @@ export const loginStatus = asyncHandler(async(req, res, next)=>{
 //@desc      UPDATE_USER funct...
 //@route    PATCH /api/profile/updateprofile
 //@access    public
-export const updatedUser = asyncHandler(async (req, res, next) => {
-    try {
-        const userExist = await User.findById(req.user._id);
 
-        if (userExist) {
-            // De-structure the data in the model
-            const { username, email, phone, photo, bio } = userExist;
-            userExist.email = email;
-            userExist.username = req.body.username || username;
-            userExist.phone = req.body.phone || phone;
-            userExist.photo = req.body.photo || photo;
-            userExist.bio = req.body.bio || bio;
+export const updatedUser = asyncHandler(async (req, res, next)=>{
+  try {
+    const userExist = await User.findById(req.user._id);
 
-            const updatedUser = await userExist.save();
+     // Check if the user(from verify.user.js) is allowed to update their account
+     if (!userExist) {
+      return next(errorHandler(403, 'You can only update your own account!'));
+     }
 
-            const jsonResponse = {
-                _id: updatedUser._id,
-                username: updatedUser.username,
-                phone: updatedUser.phone,
-                photo: updatedUser.photo,
-                bio: updatedUser.bio,
-            };
-            res.status(200).json(jsonResponse);
-        } else {
-            next(errorHandler(404, 'User not found'));
+      // Update the user and get the updated user data
+      const updatedUser = await User.findByIdAndUpdate(req.user._id, {
+        $set: {
+            username: req.body.username,
+            email: req.body.email,
+            bio: req.body.bio,
+            phone: req.body.phone,
+            photo: req.body.photo,
         }
-    } catch (error) {
-        // Handle other errors with a 500 response
-        next(error)
+    }, { new: true });
+
+    if (!updatedUser) {
+        return next(errorHandler(404, 'User not found')); // Handle the case where the user doesn't exist
     }
+
+      // Separate the password from the rest
+      const {...rest } = updatedUser._doc; // Use _doc to access document properties
+
+      res.status(200).json(rest);
+
+  } catch (error) {
+    next(error);    
+  }
+})
+
+// export const updatedUser = asyncHandler(async (req, res, next) => {
+//     try {
+//         const userExist = await User.findById(req.user._id);
+
+//         if (userExist) {
+//             // De-structure the data in the model
+//             const { username, email, phone, photo, bio } = userExist;
+//             userExist.email = email;
+//             userExist.username = req.body.username || username;
+//             userExist.phone = req.body.phone || phone;
+//             userExist.photo = req.body.photo || photo;
+//             userExist.bio = req.body.bio || bio;
+
+//             const updatedUser = await userExist.save();
+
+//             const jsonResponse = {
+//                 _id: updatedUser._id,
+//                 username: updatedUser.username,
+//                 phone: updatedUser.phone,
+//                 photo: updatedUser.photo,
+//                 bio: updatedUser.bio,
+//             };
+//             res.status(200).json(jsonResponse);
+//         } else {
+//             next(errorHandler(404, 'User not found'));
+//         }
+//     } catch (error) {
+//         // Handle other errors with a 500 response
+//         next(error)
+//     }
     
-});
+// });
 
 
 //@desc      UPDATE_USER_PASSWORD funct...

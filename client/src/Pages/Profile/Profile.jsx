@@ -44,12 +44,9 @@ const Profile = () => {
         }
     };
 
-
     useEffect(()=>{
-    
-          fetchingProfileUser();
-    
-      },[dispatch, isLoggedIn]);
+      fetchingProfileUser();
+    },[dispatch, isLoggedIn]);
       
 
 
