@@ -141,10 +141,10 @@ const handleGoogleFileUpload = (file) => {
         {filePerc === 0 ? null : (
         <div className='text-[green]'>
         <div style={{width: `${filePerc}%`}}>
-        {filePerc < 100 ? `Uploading ${filePerc.toFixed(0)}%` : `Upload completed ${filePerc}%`}
+        {filePerc < 100 ? `Uploading ${filePerc.toFixed(0)}%` : `Upload completed ${filePerc}%`} 
         </div>
-      </div>
-      )}
+        </div>
+         )}
         <form className="--form-control --m" onSubmit={saveProfile}>
           <span className="profile-data">
             <p>
@@ -164,7 +164,7 @@ const handleGoogleFileUpload = (file) => {
               name="email" 
               value={profile?.email} disabled />
               <br />
-              <code>Email cannot be changed.</code>
+              <code className="text-[red]">Email cannot be changed.</code>
             </p>
             <p>
               <label>Phone:</label>

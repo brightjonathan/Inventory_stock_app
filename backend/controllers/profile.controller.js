@@ -93,39 +93,6 @@ export const updatedUser = asyncHandler(async (req, res, next)=>{
   }
 })
 
-// export const updatedUser = asyncHandler(async (req, res, next) => {
-//     try {
-//         const userExist = await User.findById(req.user._id);
-
-//         if (userExist) {
-//             // De-structure the data in the model
-//             const { username, email, phone, photo, bio } = userExist;
-//             userExist.email = email;
-//             userExist.username = req.body.username || username;
-//             userExist.phone = req.body.phone || phone;
-//             userExist.photo = req.body.photo || photo;
-//             userExist.bio = req.body.bio || bio;
-
-//             const updatedUser = await userExist.save();
-
-//             const jsonResponse = {
-//                 _id: updatedUser._id,
-//                 username: updatedUser.username,
-//                 phone: updatedUser.phone,
-//                 photo: updatedUser.photo,
-//                 bio: updatedUser.bio,
-//             };
-//             res.status(200).json(jsonResponse);
-//         } else {
-//             next(errorHandler(404, 'User not found'));
-//         }
-//     } catch (error) {
-//         // Handle other errors with a 500 response
-//         next(error)
-//     }
-    
-// });
-
 
 //@desc      UPDATE_USER_PASSWORD funct...
 //@route    PATCH /api/profile/changepassword
