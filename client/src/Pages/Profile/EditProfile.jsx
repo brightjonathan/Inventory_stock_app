@@ -75,6 +75,7 @@ const handleGoogleFileUpload = (file) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setFilePerc(Math.round(progress));
+          //toast.success(Math.round(progress))
       },
       (error) => {
         setFileUploadError(true);
@@ -111,8 +112,9 @@ const handleGoogleFileUpload = (file) => {
      }
      //dispatch(updateUserSuccess(data));
      setProfile(data)
-     console.log(data);
+     //console.log(data);
      setLoading(false);
+     navigate("/profile");
      toast.success('updated successfully')
      //setUpdateSuccess(true);
     } catch (error) {
@@ -136,6 +138,13 @@ const handleGoogleFileUpload = (file) => {
           onClick={() => fileRef.current.click()}
           />
         </span>
+        {filePerc === 0 ? null : (
+        <div className='text-[green]'>
+        <div style={{width: `${filePerc}%`}}>
+        {filePerc < 100 ? `Uploading ${filePerc.toFixed(0)}%` : `Upload completed ${filePerc}%`}
+        </div>
+      </div>
+      )}
         <form className="--form-control --m" onSubmit={saveProfile}>
           <span className="profile-data">
             <p>
@@ -182,12 +191,19 @@ const handleGoogleFileUpload = (file) => {
               <label>Photo:</label>
               <input 
               type="file" 
-              name="image" 
               ref={fileRef}
               accept='image/*'
+              hidden
               onChange={(e) => setFile(e.target.files[0])}
                />
             </p>
+                {filePerc === 0 ? null : (
+               <div className='text-[green]'>
+               <div style={{width: `${filePerc}%`}}> 
+               {filePerc < 100 ? `Uploading ${filePerc.toFixed(0)}%` : `Upload completed ${filePerc}%`}
+               </div>
+              </div>
+              )}
             <div>
               <button className="--btn --btn-primary">Edit Profile</button>
             </div>
