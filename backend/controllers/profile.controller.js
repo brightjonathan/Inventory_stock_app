@@ -90,7 +90,7 @@ export const updatedUser = asyncHandler(async (req, res, next)=>{
   } catch (error) {
     next(error);    
   }
-})
+});
 
 
 //@desc      UPDATE_USER_PASSWORD funct...

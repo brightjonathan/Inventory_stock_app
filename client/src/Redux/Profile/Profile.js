@@ -27,6 +27,18 @@ const ProfileSlice = createSlice({
             state.error = action.payload,
             state.loading = false
         },
+        updateProfileStart: (state)=>{
+            state.loading = true
+          },
+          updateProfileSuccess: (state, action)=>{
+              state.UserProfile = action.payload,
+              state.loading = true,
+              state.error = null
+          },
+          updateProfileFailure: (state, action)=>{
+              state.error = action.payload,
+              state.loading = false
+          },
     }
 })
 
@@ -34,7 +46,10 @@ const ProfileSlice = createSlice({
 export const {
     profileStart,
     profileSuccess,
-    profileFailure
+    profileFailure,
+    updateProfileFailure,
+    updateProfileStart,
+    updateProfileSuccess
 } = ProfileSlice.actions;
 
 

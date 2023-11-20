@@ -10,6 +10,11 @@ import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/
 import './Profile.scss';
 import {app} from '../../Firebase/FirebaseConfig';
 import ChangedPassword from "../../Component/changedPassword/ChangedPassword";
+import { 
+  updateProfileFailure, 
+  updateProfileSuccess, 
+  updateProfileStart
+} from "../../Redux/Profile/Profile";
 
 
 
@@ -95,7 +100,7 @@ const handleGoogleFileUpload = (file) => {
     e.preventDefault()
     try {
       setLoading(true);
-     //dispatch(updateUserStart())
+     dispatch(updateProfileStart())
                                  
      const res =  await fetch("/api/profile/updateprofile", {
        method: 'PATCH',
@@ -106,21 +111,20 @@ const handleGoogleFileUpload = (file) => {
      });
      const data = await res.json();
      if (data.success === false) {
-      setLoading(false);
-       //dispatch(updateUserFailure(data.message))
-       console.log(data.error);
+       setLoading(false);
+       dispatch(updateProfileFailure(data.message))
+       //console.log(data.error);
        return;
      }
-     //dispatch(updateUserSuccess(data));
+     dispatch(updateProfileSuccess(data));
      setProfile(data)
      //console.log(data);
      setLoading(false);
      navigate("/profile");
      toast.success('updated successfully')
-     //setUpdateSuccess(true);
     } catch (error) {
-      //dispatch(updateUserFailure(error.message));
-      console.log(error);
+      dispatch(updateProfileFailure(error.message));
+      //console.log(error);
       setLoading(false);
     }
  
