@@ -96,7 +96,6 @@ export const updatedUser = asyncHandler(async (req, res, next)=>{
 //@desc      UPDATE_USER_PASSWORD funct...
 //@route    PATCH /api/profile/changepassword
 //@access    public
-
 export const passwordChange = asyncHandler(async (req, res, next) => {
   try {
     // Retrieve the user
@@ -130,39 +129,6 @@ export const passwordChange = asyncHandler(async (req, res, next) => {
   }
 });
 
-// export const passwordChange = asyncHandler(async (req, res, next)=>{
-//   try {
-//     const userExist = await User.findById(req.user._id);
-
-//     const {oldpassword, password} = req.body;
-
-//     //if no user
-//     if (!userExist) {
-//         next(errorHandler(400, 'user does not exist'));
-//         return;
-//     };
-
-//     //validation
-//     if (!oldpassword || !password) {
-//         next(errorHandler(400, 'please, fill in the required fields'));
-//         return;
-//     };
-
-//     //checking id old password matches new password
-//     const passwordIsCorrect = bcrypt.compareSync(oldpassword, userExist.password);
-
-//     //save new password
-//     if (passwordIsCorrect) {
-//         userExist.password = password
-//         await userExist.save()
-//         res.status(200).json('password changed successfull');
-//     }else{
-//         next(errorHandler(404, 'password is incorrect'));
-//     }
-//   } catch (error) {
-//     next(error)
-//   };
-// });
 
 
 //@desc      FORGOTTEN_PASSWORD funct...
