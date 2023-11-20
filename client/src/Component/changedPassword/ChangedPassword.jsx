@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Card from '../card/Card';
 import Loader from '../loading/Loader';
+import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
 
 
 
@@ -14,6 +15,24 @@ const ChangedPassword = () => {
   const [password, setpassword] = useState('');
   const [password2, setpassword2] = useState('');
   const [loading, setLoading] = useState(false);
+
+  //toggling for password eye
+  const [oldpasswordEye, setoldPasswordEye] = useState(false);
+  const handleoldPasswordEye = () => {
+    setoldPasswordEye(!oldpasswordEye)
+  }
+
+  //toggling for password eye
+  const [newpasswordEye, setnewPasswordEye] = useState(false);
+  const handlenewPasswordEye = () => {
+    setnewPasswordEye(!newpasswordEye)
+  }
+
+  //toggling for password eye
+  const [comfirmpasswordEye, setcomfirmPasswordEye] = useState(false);
+  const handlecomfirmPasswordEye = () => {
+    setcomfirmPasswordEye(!comfirmpasswordEye)
+  }
 
 
   const changePassword = async(e) =>{
@@ -64,14 +83,21 @@ const ChangedPassword = () => {
     <Card cardClass={"password-card"}>
       <h3>Change Password</h3>
       <form onSubmit={changePassword} className="--form-control text-[black]">
+        <div className='my-2 w-full relative'>
         <input
-          type="password"
+          type={(oldpasswordEye === false) ? 'password' : 'text'}
           placeholder="Old Password"
           required
           name="oldpassword"
           value={oldpassword}
           onChange={(e) => setoldpassword(e.target.value)}
         />
+        <div className='absolute right-4 top-5 cursor-pointer'>
+            {(oldpasswordEye === false) ? 
+            <AiFillEyeInvisible size={20} onClick={handleoldPasswordEye} className='text-gray-400'/> 
+            : <AiFillEye size={20} onClick={handleoldPasswordEye} className='text-gray-400'/>}
+            </div>
+        </div>
         <input
           type="password"
           placeholder="New Password"

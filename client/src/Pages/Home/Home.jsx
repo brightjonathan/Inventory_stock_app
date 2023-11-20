@@ -4,7 +4,7 @@ import {RiProductHuntLine} from 'react-icons/ri';
 import { Link } from "react-router-dom";
 import hero from '../../assets/hero-inve.png';
 import {useSelector} from 'react-redux';
-
+import logo from '../../../public/e-ventorylogo.png';
 
 const Home = () => {
 
@@ -28,7 +28,7 @@ const Home = () => {
     <div className="home">
       <nav className='container --flex-between'>
       <div className="logo">
-          <RiProductHuntLine size={35} />
+          <img src={logo} alt="logo" className='w-[9vh] h-[9vh] lg:w-[15vh] lg:h-[15vh]' />
         </div>
 
         <ul className="home-links">

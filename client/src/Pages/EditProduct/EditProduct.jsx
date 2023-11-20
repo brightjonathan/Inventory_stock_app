@@ -13,10 +13,13 @@ import {
   } from '../../Redux/product/ProductSlice';
   import Loader from '../../Component/loading/Loader';
   import { toast } from "react-toastify";
-
+  import useRedirectLoggedOutUser from '../../customerHook/UserRedirect';
 
 
 const EditProduct = () => {
+
+  //from our cutom hook
+  useRedirectLoggedOutUser('/login');
 
     const {id} = useParams()
   
