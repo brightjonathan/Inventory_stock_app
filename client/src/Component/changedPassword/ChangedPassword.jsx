@@ -9,32 +9,13 @@ import {AiFillEyeInvisible, AiFillEye} from 'react-icons/ai';
 
 
 const ChangedPassword = () => {
-
+  
   const navigate = useNavigate();
   const [oldpassword, setoldpassword] = useState('');
   const [password, setpassword] = useState('');
   const [password2, setpassword2] = useState('');
   const [loading, setLoading] = useState(false);
-
-  //toggling for password eye
-  const [oldpasswordEye, setoldPasswordEye] = useState(false);
-  const handleoldPasswordEye = () => {
-    setoldPasswordEye(!oldpasswordEye)
-  }
-
-  //toggling for password eye
-  const [newpasswordEye, setnewPasswordEye] = useState(false);
-  const handlenewPasswordEye = () => {
-    setnewPasswordEye(!newpasswordEye)
-  }
-
-  //toggling for password eye
-  const [comfirmpasswordEye, setcomfirmPasswordEye] = useState(false);
-  const handlecomfirmPasswordEye = () => {
-    setcomfirmPasswordEye(!comfirmpasswordEye)
-  }
-
-
+  
   const changePassword = async(e) =>{
     e.preventDefault();
   
@@ -76,7 +57,24 @@ const ChangedPassword = () => {
 
 
 
-  
+  //toggling for password eye
+  const [oldpasswordEye, setoldPasswordEye] = useState(false);
+  const handleoldPasswordEye = () => {
+    setoldPasswordEye(!oldpasswordEye)
+  }
+
+  //toggling for password eye
+  const [newpasswordEye, setnewPasswordEye] = useState(false);
+  const handlenewPasswordEye = () => {
+    setnewPasswordEye(!newpasswordEye)
+  }
+
+  //toggling for password eye
+  const [comfirmpasswordEye, setcomfirmPasswordEye] = useState(false);
+  const handlecomfirmPasswordEye = () => {
+    setcomfirmPasswordEye(!comfirmpasswordEye)
+  }
+
   return (
     <div className="change-password">
         {loading && <Loader />}
@@ -96,24 +94,40 @@ const ChangedPassword = () => {
             {(oldpasswordEye === false) ? 
             <AiFillEyeInvisible size={20} onClick={handleoldPasswordEye} className='text-gray-400'/> 
             : <AiFillEye size={20} onClick={handleoldPasswordEye} className='text-gray-400'/>}
-            </div>
+         </div>
         </div>
+
+        <div className='my-2 w-full relative'>
         <input
-          type="password"
+          type={(newpasswordEye === false) ? 'password' : 'text'}
           placeholder="New Password"
           required
           name="password"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
+        <div className='absolute right-4 top-5 cursor-pointer'>
+        {(newpasswordEye === false) ? 
+            <AiFillEyeInvisible size={20} onClick={handlenewPasswordEye} className='text-gray-400'/>
+            : <AiFillEye size={20} onClick={handlenewPasswordEye} className='text-gray-400'/>}
+        </div>
+        </div>
+
+        <div className='my-2 w-full relative'>
         <input
-          type="password"
+          type={(comfirmpasswordEye === false) ? 'password' : 'text'}
           placeholder="Confirm New Password"
           required
           name="password2"
           value={password2}
           onChange={(e) => setpassword2(e.target.value)}
         />
+        <div className='absolute right-4 top-5 cursor-pointer'>
+        {(comfirmpasswordEye === false) ? 
+            <AiFillEyeInvisible size={20} onClick={handlecomfirmPasswordEye} className='text-gray-400'/> 
+            : <AiFillEye size={20} onClick={handlecomfirmPasswordEye} className='text-gray-400'/>}
+        </div>
+        </div>
         <button type="submit" className="--btn --btn-primary">
           Change Password
         </button>
@@ -121,6 +135,6 @@ const ChangedPassword = () => {
     </Card>
   </div>
   )
-}
+};
 
-export default ChangedPassword
+export default ChangedPassword;
