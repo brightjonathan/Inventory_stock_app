@@ -26,13 +26,13 @@ export const contactus = asyncHandler(async (req, res, next)=>{
 
   try {
     await sendEmail(subject, message, send_to, sent_from, reply_to);
+    //console.log({ success: true, message: "Email Sent" });
     res.status(200).json({ success: true, message: "Email Sent" });
   } catch (error) {
     next(error);
   }
 
 });
-
 
 
 

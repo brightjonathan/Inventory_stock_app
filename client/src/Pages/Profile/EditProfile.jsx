@@ -1,6 +1,6 @@
 import {useRef, useEffect, useState } from "react";
 import './Profile.scss';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useRedirectLoggedOutUser from '../../customerHook/UserRedirect';
 import { useDispatch, useSelector } from 'react-redux';
 import Card from "../../Component/card/Card";
@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
 import './Profile.scss';
 import {app} from '../../Firebase/FirebaseConfig';
+import ChangedPassword from "../../Component/changedPassword/ChangedPassword";
 
 
 
@@ -21,7 +22,6 @@ const dispatch = useDispatch();
 //from our cutom hook
 useRedirectLoggedOutUser('/login');
 
-const [loading, setLoading] = useState(false);
 const { UserProfile } = useSelector((state) => state.profile);
 
 const user = UserProfile;  //de-structuring the userProfile 
@@ -48,6 +48,7 @@ const [profile, setProfile] = useState(initialState);
 const [file, setFile] = useState(undefined);
 const [filePerc, setFilePerc] = useState(0);
 const [fileUploadError, setFileUploadError] = useState(false);
+const [loading, setLoading] = useState(false);
 
 const handleInputChange = (e) => {
   const { name, value } = e.target;
@@ -95,7 +96,7 @@ const handleGoogleFileUpload = (file) => {
     try {
       setLoading(true);
      //dispatch(updateUserStart())
-                                 //passing the id to the backend
+                                 
      const res =  await fetch("/api/profile/updateprofile", {
        method: 'PATCH',
        headers: {
@@ -211,7 +212,7 @@ const handleGoogleFileUpload = (file) => {
         </form>
       </Card>
       <br />
-      {/* <ChangePassword /> */}
+      <ChangedPassword />
     </div>
   )
 };

@@ -17,6 +17,7 @@ import ProductDetails from './Component/Products/ProductDetails/ProductDetails';
 import EditProduct from './Pages/EditProduct/EditProduct';
 import Profile from './Pages/Profile/Profile';
 import EditProfile from './Pages/Profile/EditProfile';
+import Contact from './Pages/contact/Contact';
 
 
 
@@ -78,6 +79,14 @@ const App = () => {
             <Sidebars>
               <Layout>
                  <EditProfile />
+              </Layout>
+            </Sidebars>
+          }/>
+
+          <Route path='/contact-us' element={
+            <Sidebars>
+              <Layout>
+                 <Contact />
               </Layout>
             </Sidebars>
           }/>
