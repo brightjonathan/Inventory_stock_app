@@ -45,6 +45,13 @@ app.use('/api/profile', profileRouter);
 app.use('/api/product', productRouter);
 app.use('/api/contact', contactRouter);
 
+//it has to be after the api routes
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+})
+
 //middleware for handling errors 
 app.use((err, req, res, next)=>{
     const statuscode  = err.statuscode || 500;
