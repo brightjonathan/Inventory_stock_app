@@ -18,6 +18,7 @@ import EditProduct from './Pages/EditProduct/EditProduct';
 import Profile from './Pages/Profile/Profile';
 import EditProfile from './Pages/Profile/EditProfile';
 import Contact from './Pages/contact/Contact';
+import PageNotFound from './Pages/Notfound/PageNotFound';
 
 
 
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
         <Route path="/resetpassword/:resetToken" element={<Reset/>} />
+        <Route path='*' element={<PageNotFound/>} />
 
         <Route element={<PrivateRoute/>}>
           
