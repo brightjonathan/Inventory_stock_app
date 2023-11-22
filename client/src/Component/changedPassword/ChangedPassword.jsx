@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import './changed.scss';
+import './Changed.scss';
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Card from '../card/Card';
