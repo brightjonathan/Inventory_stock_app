@@ -7,16 +7,16 @@ import {
     profileFailure, 
     profileStart, 
     profileSuccess 
-} from "../../Redux/Profile/Profile";
+} from "../../Redux/user/Auth.slice";
 
 const Profile = () => {
 
     const dispatch = useDispatch();
 
-    const { isLoggedIn} = useSelector((state) => state.user);
-    const { UserProfile } = useSelector((state) => state.profile);
+    const {currentUser,  isLoggedIn} = useSelector((state) => state.user);
+  
 
-    const [profile, setProfile] = useState(UserProfile);
+    const [profile, setProfile] = useState(currentUser);
     const [loading, setLoading] = useState(false);
 
     const fetchingProfileUser = async ()=>{
@@ -39,7 +39,6 @@ const Profile = () => {
             setProfile(data)
             setLoading(false);
         } catch (error) {
-           setError(true)
            setLoading(false)
         }
     };

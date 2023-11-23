@@ -14,7 +14,7 @@ import {
   updateProfileFailure, 
   updateProfileSuccess, 
   updateProfileStart
-} from "../../Redux/Profile/Profile";
+} from "../../Redux/user/Auth.slice";
 
 
 
@@ -27,9 +27,10 @@ const dispatch = useDispatch();
 //from our cutom hook
 useRedirectLoggedOutUser('/login');
 
-const { UserProfile } = useSelector((state) => state.profile);
+//const { UserProfile } = useSelector((state) => state.profile);
+const {currentUser, } = useSelector((state) => state.user);
 
-const user = UserProfile;  //de-structuring the userProfile 
+const user = currentUser;  //de-structuring the userProfile 
 const { email } = user; //de-structuring the email
 
 

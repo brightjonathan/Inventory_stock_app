@@ -3,7 +3,7 @@ import NotFound from '../../assets/404.gif';
 
 const PageNotFound = () => {
   return (
-    <div className='mt-[-15vh] lg:mt-[-20vh] mb-[4vh] flex flex-col items-center justify-center ' >
+    <div className='mt-[-15vh] lg:mt-[-20vh] mb-[4vh] flex flex-col items-center justify-center'>
       <img src={NotFound} alt='page not found' className='pt-[17vh] w-[50%] lg:w-[30%] ' loading='lazy'/>
       <div>
         <h2 className='text-center sm:text-4xl  font-mono font-extrabold'>Oops! Seems Something happen</h2>

@@ -65,7 +65,31 @@ const userSlice = createSlice({
         signoutUserFailure: (state, action)=>{
             state.error = action.payload;
             state.loading = false
-        }
+        },
+        profileStart: (state)=>{
+            state.loading = true
+          },
+          profileSuccess: (state, action)=>{
+              state.currentUser = action.payload,
+              state.loading = true,
+              state.error = null
+          },
+          profileFailure: (state, action)=>{
+              state.error = action.payload,
+              state.loading = false
+          },
+          updateProfileStart: (state)=>{
+              state.loading = true
+            },
+            updateProfileSuccess: (state, action)=>{
+                state.currentUser = action.payload,
+                state.loading = true,
+                state.error = null
+            },
+            updateProfileFailure: (state, action)=>{
+                state.error = action.payload,
+                state.loading = false
+            },
     }
 })
 
@@ -83,6 +107,12 @@ export const {
     signoutUserStart,
     signoutUserSuccess,
     signoutUserFailure,
+    profileFailure,
+    profileStart,
+    profileSuccess, 
+    updateProfileFailure,
+    updateProfileStart, 
+    updateProfileSuccess,
     SET_LOGIN
 } = userSlice.actions;
 

@@ -3,7 +3,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import UserReducer from './user/Auth.slice';
 import ProductReducer from '../Redux/product/ProductSlice';
 import FilterReducer from '../Redux/product/FilterSlice';
-import ProfileReducer from '../Redux/Profile/Profile';
+//import ProfileReducer from '../Redux/Profile/Profile';
 import storage from 'redux-persist/lib/storage';
 
 
@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
     user: UserReducer,
     product: ProductReducer,
     filter: FilterReducer,
-    profile: ProfileReducer,
+    //profile: ProfileReducer,
 });
 
 const persistConfig = {
