@@ -35,7 +35,7 @@ const Home = () => {
 
           {!currentUser ? <li> <Link to="/register">Register</Link> </li> : null}
 
-          {currentUser && <h2 className='text-[green] text-[15px]'> {greeting}, {currentUser.username} </h2>} 
+          {currentUser && <h2 className='text-[white] text-[15px]'> {greeting}, {currentUser.username} </h2>}
 
             <li>
               <button className="--btn --btn-primary">
@@ -53,11 +53,11 @@ const Home = () => {
         <div className="hero-text">
         <h2>e-ventory & Stock Management Solution for business</h2> 
         <p>
-           our e-ventory system control and manage proucts in the warehouse in
+           our e-ventory system control and manage products in the warehouse in
             real time and integrated to make it easier to develop your business.
           </p><div className="hero-buttons">
             <button className="--btn --btn-secondary">
-              <Link to="/dashboard">Free Trial 1 Month</Link>
+              <Link to="/dashboard">Get started for Free</Link>
             </button>
           </div>
           <div className="--flex-start">
